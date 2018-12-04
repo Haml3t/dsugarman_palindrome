@@ -1,20 +1,27 @@
 require "dsugarman_palindrome/version"
 
-class String
+module DsugarmanPalindrome
 
-  # Returns true for a palindrome, false otherwise.
   def palindrome?
-    processed_content == processed_content.reverse
-  end
-
-  def letters
-    self.chars.select { |c| c.match(/[a-z]/i) }.join
+    if processed_content.empty?
+      false
+    else
+      processed_content == processed_content.reverse
+    end
   end
 
   private
 
-  # Returns content for palindrome testing.
+  # returns content for palindrome testing
   def processed_content
-    self.scan(/[a-z]/i).join.downcase
+    self.to_s.scan(/\w/i).join.downcase
   end
+end
+
+class String
+  include DsugarmanPalindrome
+end
+
+class Integer
+  include DsugarmanPalindrome
 end
